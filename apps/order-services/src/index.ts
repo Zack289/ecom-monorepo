@@ -1,29 +1,22 @@
-import 'dotenv/config';
+import "dotenv/config";
 import Fastify from "fastify";
 import { clerkPlugin, getAuth } from "@clerk/fastify";
+import { shouldBeUser } from "./middleware/authMiddleware";
 
-const fastify = Fastify({ logger: true })
+const fastify = Fastify({ logger: true });
 
 fastify.register(clerkPlugin);
-
 
 fastify.get("/health", (request, reply) => {
   return reply.status(200).send({
     status: "ok",
-    uptime:process.uptime(),
-    timeStamp:Date.now(),
-  })
-
+    uptime: process.uptime(),
+    timeStamp: Date.now(),
+  });
 });
 
-fastify.get("/test", (request, reply) => {
-  const {userId} = getAuth(request);
-
-  if(!userId){
-    return reply.send({message: "You are not logged in"});
-  };
-
-  return reply.send({message: "Order service in authenticated"});
+fastify.get("/test", { preHandler: shouldBeUser }, (request, reply) => {
+  return reply.send({ message: "Order service in authenticated", userid: request.userId });
 });
 
 // fastify.get('/protected', async (request, reply) => {

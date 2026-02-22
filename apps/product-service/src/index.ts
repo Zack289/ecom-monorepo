@@ -2,11 +2,10 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 
-import { clerkMiddleware, getAuth } from '@clerk/express'
-
+import { clerkMiddleware, getAuth } from "@clerk/express";
+import { shouldBeUser } from "./midleware/authMiddleware";
 
 const app = express();
-
 
 app.use(
   cors({
@@ -17,7 +16,6 @@ app.use(
 
 app.use(clerkMiddleware());
 
-
 app.get("/health", (req: Request, res: Response) => {
   return res.status(200).json({
     status: "ok",
@@ -26,15 +24,8 @@ app.get("/health", (req: Request, res: Response) => {
   });
 });
 
-app.get("/test", (req, res) => {
-   const auth = getAuth(req);
-   console.log(auth)
-   const userId = auth.userId;
-
-   if(!userId){
-    return res.status(401).json({ message: "You are not logged in"});
-   }
-  res.json({ message: "Product service authenticated" });
+app.get("/test", shouldBeUser, (req, res) => {
+  res.json({ message: "Product service authenticated", userId: req.userId });
 });
 
 // app.get("/test", (req, res) => {

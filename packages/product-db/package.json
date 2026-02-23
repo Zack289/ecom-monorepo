@@ -7,20 +7,19 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy"
   },
-   "devDependencies": {
+  "devDependencies": {
+    "@repo/typescript-config": "*",
     "@types/node": "^24.3.1",
-    "prisma": "^6.16.0",
-    "@repo/typescript-config": "*"
+    "prisma": "^6.19.2"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^6.19.2",
     "@types/node": "^20.19.33",
     "dotenv": "^16.0.3",
-    "pg": "^8.18.0",
-    "prisma": "^6.19.2"
+    "pg": "^8.18.0"
   },
-   "exports": {
+  "exports": {
     ".": "./src/index.ts"
   }
 }

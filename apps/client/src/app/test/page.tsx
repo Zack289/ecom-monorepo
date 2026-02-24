@@ -14,7 +14,7 @@ const TestPage = async () => {
     });
     const dataProduct = await resProduct.json();
 
-    console.log(dataProduct);
+    // console.log(dataProduct);
 
     // order service 
 
@@ -25,7 +25,7 @@ const TestPage = async () => {
     });
     const dataOrder = await resOrder.json();
 
-    console.log(dataOrder);
+    // console.log(dataOrder);
     
     // order service 
 
@@ -36,7 +36,7 @@ const TestPage = async () => {
     });
     const dataPayment = await resPyment.json();
 
-    console.log(dataPayment);
+    // console.log(dataPayment);
   return (
     <div>TestPage</div>
   );

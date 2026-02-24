@@ -3,6 +3,9 @@ import Fastify from "fastify";
 import { clerkPlugin, getAuth } from "@clerk/fastify";
 import { shouldBeUser } from "./middleware/authMiddleware";
 
+import { connectOrderDB } from "@repo/order-db";
+import { orderRoute } from "./routes/order";
+
 const fastify = Fastify({ logger: true });
 
 fastify.register(clerkPlugin);
@@ -16,38 +19,22 @@ fastify.get("/health", (request, reply) => {
 });
 
 fastify.get("/test", { preHandler: shouldBeUser }, (request, reply) => {
-  return reply.send({ message: "Order service in authenticated", userid: request.userId });
+  return reply.send({
+    message: "Order service in authenticated",
+    userid: request.userId,
+  });
 });
 
-// fastify.get('/protected', async (request, reply) => {
-//   try {
-//     // Use `getAuth()` to access `isAuthenticated` and the user's ID
-//     const { isAuthenticated, userId } = getAuth(request)
-
-//     // If user isn't authenticated, return a 401 error
-//     if (!isAuthenticated) {
-//       return reply.code(401).send({ error: 'User not authenticated' })
-//     }
-
-//     // Use `clerkClient` to access Clerk's JS Backend SDK methods
-//     // and get the user's User object
-//     const user = await clerkClient.users.getUser(userId)
-
-//     return reply.send({
-//       message: 'User retrieved successfully',
-//       user,
-//     })
-//   } catch (error) {
-//     fastify.log.error(error)
-//     return reply.code(500).send({ error: 'Failed to retrieve user' })
-//   }
-// })
+fastify.register(orderRoute);
 
 const start = async () => {
   try {
+    await connectOrderDB()
+    console.log("Connected to MongoDB");
     await fastify.listen({ port: 8001 });
     console.log("Order service is running on port 8001");
   } catch (err) {
+    console.log(err);
     fastify.log.error(err);
     process.exit(1);
   }

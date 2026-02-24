@@ -5,7 +5,7 @@ const TestPage = async () => {
     const {getToken} = await auth();
     const token = await getToken();
 
-    // console.log(token);
+    console.log(token);
     //product service
     const resProduct = await fetch("http://localhost:8000/test", {
       headers:{
@@ -29,12 +29,12 @@ const TestPage = async () => {
     
     // order service 
 
-    const resPyment = await fetch("http://localhost:8002/test", {
+    const resPayment = await fetch("http://localhost:8002/test", {
       headers:{
         Authorization: `Bearer ${token}`
       }
     });
-    const dataPayment = await resPyment.json();
+    const dataPayment = await resPayment.json();
 
     // console.log(dataPayment);
   return (

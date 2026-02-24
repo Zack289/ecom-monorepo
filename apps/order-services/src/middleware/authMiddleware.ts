@@ -1,19 +1,42 @@
 import { getAuth } from "@clerk/fastify";
 import { FastifyReply, FastifyRequest } from "fastify";
+import type { CustomJwtSessionClaims } from "@repo/types";
 
-declare module "fastify"{
-    interface FastifyRequest{
-        userId?: string;
-    }
+declare module "fastify" {
+  interface FastifyRequest {
+    userId?: string;
+  }
 }
 
 //we dont need next function for fastify
-export const shouldBeUser = async (request: FastifyRequest, reply: FastifyReply) => {
+export const shouldBeUser = async (
+  request: FastifyRequest,
+  reply: FastifyReply,
+) => {
   const { userId } = getAuth(request);
 
   if (!userId) {
-    return reply.send({ message: "You are not logged in" });
-  };
+    return reply.status(401).send({ message: "You are not logged in" });
+  }
 
   request.userId = userId;
+};
+
+export const shouldBeAdmin = async (
+  request: FastifyRequest,
+  reply: FastifyReply,
+) => {
+  const auth = getAuth(request);
+
+  if (!auth.userId) {
+    return reply.status(401).send({ message: "You are not logged in" });
+  }
+
+  const claims = auth.sessionClaims as CustomJwtSessionClaims;
+
+  if (claims.metadata?.role !== "admin") {
+    return reply.status(401).send({ message: "Unauthorized" });
+  }
+
+  request.userId = auth.userId;
 };

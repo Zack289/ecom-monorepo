@@ -2,6 +2,7 @@
 
 // import PaymentForm from "@/component/PaymentForm";
 import ShippingForm from "@/component/ShippingForm";
+import StripePaymentForm from "@/component/StripePaymentForm";
 import useCartStore from "@/stores/cardStore";
 import { ShippingFormInputs } from "@repo/types";
 import { ArrowRight, Trash2 } from "lucide-react";
@@ -170,7 +171,7 @@ const CartPage = () => {
             <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
             // <PaymentForm />
-            "TODO: add stripe form"
+            <StripePaymentForm shippingForm={shippingForm}/>
           ) : (
             <p className="text-sm text-gray-500">
               Please fill in the shipping form to continue.

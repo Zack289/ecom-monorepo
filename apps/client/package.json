@@ -23,8 +23,10 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
     "@repo/types": "*",
+    "@repo/typescript-config": "*",
+    "@stripe/react-stripe-js": "^3.10.0",
+    "@stripe/stripe-js": "^7.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

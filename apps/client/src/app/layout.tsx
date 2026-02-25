@@ -6,6 +6,8 @@ import Footer from "@/component/Footer";
 import { ToastContainer } from "react-toastify";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import "./loading.css"
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

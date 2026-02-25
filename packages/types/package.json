@@ -6,10 +6,14 @@
   "scripts": {
     "check-types": "tsc --noEmit"
   },
-    "devDependencies": {
-        "@repo/typescript-config": "*"
-    },
-    "exports": {
+  "dependencies": {
+    "@repo/product-db": "*",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*"
+  },
+  "exports": {
     ".": {
       "import": "./src/index.ts",
       "types": "./src/index.ts"

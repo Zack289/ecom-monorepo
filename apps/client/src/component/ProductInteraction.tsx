@@ -1,7 +1,7 @@
 "use client";
 
 import useCartStore from "@/stores/cardStore";
-import { ProductType } from "@/types";
+import { ProductType } from "@repo/types";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -20,7 +20,7 @@ const ProductInteraction = ({
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
-  const {addToCart} = useCartStore();
+  const { addToCart } = useCartStore();
 
   const [quantity, setQuantity] = useState(1);
 
@@ -40,12 +40,15 @@ const ProductInteraction = ({
     }
   };
 
-  const handleAddToCart = ()=>{
+  const handleAddToCart = () => {
     addToCart({
-        ...product,quantity,selectedColor,selectedSize
+      ...product,
+      quantity,
+      selectedColor,
+      selectedSize,
     });
-    toast.success("Product added to cart.")
-  }
+    toast.success("Product added to cart.");
+  };
 
   return (
     <div className="flex flex-col gap-4 mt-4">

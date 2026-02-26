@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import sessionRoute from "./route/session.route.js";
 import { cors } from "hono/cors";
+import webhookRoute from "./route/webhooks.route.js";
 
 const app = new Hono();
 app.use("*", cors({ origin: ["http://localhost:3002"] }));
@@ -18,6 +19,7 @@ app.get("/health", (c) => {
 });
 
 app.route("/sessions", sessionRoute);
+app.route("/webhooks", webhookRoute);
 
 // app.post("/create-stripe-product", async (c) => {
 //   const res = await stripe.products.create({

@@ -1,7 +1,7 @@
 import { stripeProductType } from "@repo/types";
 import stripe from "./stripe";
 
-export const createStripeProduct = async (item:stripeProductType) => {
+export const createStripeProduct = async (item: stripeProductType) => {
   try {
     const res = await stripe.products.create({
       id: item.id,
@@ -11,7 +11,6 @@ export const createStripeProduct = async (item:stripeProductType) => {
         unit_amount: item.price * 100,
       },
     });
-
     return res;
   } catch (error) {
     console.log(error);
@@ -19,13 +18,11 @@ export const createStripeProduct = async (item:stripeProductType) => {
   }
 };
 
-//for the product price
-export const createStripeProductPrice = async (productId: number) => {
+export const getStripeProductPrice = async (productId: number) => {
   try {
     const res = await stripe.prices.list({
-      product: "123",
+      product: productId.toString(),
     });
-
     return res.data[0]?.unit_amount;
   } catch (error) {
     console.log(error);

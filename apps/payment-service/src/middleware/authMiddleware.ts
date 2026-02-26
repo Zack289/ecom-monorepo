@@ -11,8 +11,10 @@ export const shouldBeUser = createMiddleware<{
 
   if (!userId) {
     return c.json({
-      message: "You are not logged in.",
-    });
+      error: {
+        message: "You are not logged in.",
+      },
+    }, 401);
   }
 
   c.set("userId", userId);

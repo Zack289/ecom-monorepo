@@ -9,11 +9,11 @@ import useCartStore from "@/stores/cardStore";
 import CheckoutForm from "./CheckoutForm";
 import Loading from "./Loading";
 const stripe = loadStripe(
-  "pk_test_51MdCLkDhkeDdZct5FkM9qMlMvAzsJpObS6eUy44jYLuVMhUFjYjzr4VLodA0GiUj0WBaOSzm38QJ8ju3SAYhdNkF00myyAyh6M",
+  "pk_test_51T0ftVGXfZIxKmc8m8FU2aXwmO5odi5YiLZsnHW5EKqH8NE98rNwbgS5K91ppUzD3oZppYCg7RMzdp4w48tqQ6yy00EoZClGd8",
 );
 
 const fetchClientSecret = async (cart: CartItemsType, token: string) => {
-  return fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_PAYMENT_SERVICE_URL}/sessions/create-checkout-session`,
     {
       method: "POST",
@@ -25,9 +25,15 @@ const fetchClientSecret = async (cart: CartItemsType, token: string) => {
         Authorization: `Bearer ${token}`,
       },
     },
-  )
-    .then((response) => response.json())
-    .then((json) => json.checkoutSessionClientSecret);
+  );
+  
+  const json = await response.json();
+  
+  if (!response.ok || !json.checkoutSessionClientSecret) {
+    throw new Error(json.error?.message || "Failed to create checkout session");
+  }
+  
+  return json.checkoutSessionClientSecret;
 };
 
 const StripePaymentForm = ({

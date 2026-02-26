@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import stripe from "../utils/stripe";
 import { shouldBeUser } from "../middleware/authMiddleware";
 import { CartItemsType } from "@repo/types";
-import { getStripeProductPrice } from "../utils/stripeProduct";
 
 const sessionRoute = new Hono();
 
@@ -10,21 +9,18 @@ sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
   const { cart }: { cart: CartItemsType } = await c.req.json();
   const userId = c.get("userId");
 
-  const lineItems = await Promise.all(
-    cart.map(async (item) => {
-      const unitAmount = await getStripeProductPrice(item.id);
-      return {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: item.name,
-          },
-          unit_amount: unitAmount as number,
+  const lineItems = cart.map((item) => {
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
         },
-        quantity: item.quantity,
-      };
-    })
-  );
+        unit_amount: item.price * 100, // Convert to cents
+      },
+      quantity: item.quantity,
+    };
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -38,10 +34,22 @@ sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
 
     // console.log(session);
 
+    if (!session.client_secret) {
+      return c.json({
+        error: {
+          message: "Failed to generate client secret for checkout session",
+        },
+      }, 500);
+    }
+
     return c.json({ checkoutSessionClientSecret: session.client_secret });
   } catch (error) {
-    console.log(error);
-    return c.json({ error });
+    console.error("Checkout session creation error:", error);
+    return c.json({
+      error: {
+        message: error instanceof Error ? error.message : "Failed to create checkout session",
+      },
+    }, 500);
   }
 });
 

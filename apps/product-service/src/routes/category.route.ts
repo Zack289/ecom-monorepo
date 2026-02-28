@@ -6,7 +6,6 @@ import {
   updateCategory,
 } from "../controllers/category.controller";
 import { shouldBeAdmin } from "../midleware/authMiddleware";
-// import { shouldBeAdmin } from "../middleware/authMiddleware";
 
 const router: Router = Router();
 

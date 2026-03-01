@@ -35,7 +35,7 @@ const CheckoutForm = ({
 
   return (
     <form className="flex items-center justify-center flex-col">
-      <PaymentElement options={{ layout: "accordion" }} className="w-full"/>
+      <PaymentElement options={{ layout: "accordion" }} className="w-full" />
 
       <button
         disabled={loading}

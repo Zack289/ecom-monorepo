@@ -58,6 +58,8 @@ export const deleteProduct = async (req: Request, res: Response) => {
     where: { id: Number(id) },
   });
 
+    producer.sendMsg("Product deleated", { value: Number(id) });
+
   res
     .status(200)
     .json({ message: "Product deleted sucessfully", deletedProduct });

@@ -19,8 +19,8 @@ const product: ProductType = {
     green: "/products/1gr.png",
   },
   categorySlug: "test",
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  createdAt: "2026-04-16T00:00:00Z" as any,
+  updatedAt: "2026-04-16T00:00:00Z" as any,
 };
 
 export const generateMetadata = async ({

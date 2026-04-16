@@ -20,6 +20,14 @@ app.get("/health", (c) => {
   });
 });
 
+app.get("/test", async (c) => {
+  const auth = await getAuth(c);
+  return c.json({
+    message: "Payment service authenticated",
+    userId: auth.userId || "no-auth",
+  });
+});
+
 app.route("/sessions", sessionRoute);
 app.route("/webhooks", webhookRoute);
 

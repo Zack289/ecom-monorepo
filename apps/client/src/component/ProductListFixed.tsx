@@ -22,8 +22,8 @@ const products: ProductsType = [
       green: "/products/1gr.png",
     },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 2,
@@ -37,8 +37,8 @@ const products: ProductsType = [
     colors: ["gray", "green"],
     images: { gray: "/products/2g.png", green: "/products/2gr.png" },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 3,
@@ -56,8 +56,8 @@ const products: ProductsType = [
       black: "/products/3bl.png",
     },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 123,
@@ -71,8 +71,8 @@ const products: ProductsType = [
     colors: ["white", "pink"],
     images: { white: "/products/4w.png", pink: "/products/4p.png" },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 5,
@@ -90,8 +90,8 @@ const products: ProductsType = [
       black: "/products/5bl.png",
     },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 6,
@@ -105,8 +105,8 @@ const products: ProductsType = [
     colors: ["gray", "white"],
     images: { gray: "/products/6g.png", white: "/products/6w.png" },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 7,
@@ -120,12 +120,12 @@ const products: ProductsType = [
     colors: ["gray", "pink"],
     images: { gray: "/products/7g.png", pink: "/products/7p.png" },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
   {
     id: 8,
-    name: "Levi’s Classic Denim",
+    name: "Levi's Classic Denim",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -135,8 +135,8 @@ const products: ProductsType = [
     colors: ["blue", "green"],
     images: { blue: "/products/8b.png", green: "/products/8gr.png" },
     categorySlug: "test",
-    createdAt: "2026-04-16T00:00:00Z" as any,
-    updatedAt: "2026-04-16T00:00:00Z" as any,
+    createdAt: "2026-04-16T00:00:00.000Z" as any,
+    updatedAt: "2026-04-16T00:00:00.000Z" as any,
   },
 ];
 

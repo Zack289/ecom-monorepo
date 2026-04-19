@@ -6,6 +6,7 @@ import { shouldBeUser } from "./middleware/authMiddleware";
 import { connectOrderDB } from "@repo/order-db";
 import { orderRoute } from "./routes/order";
 import { consumer, producer } from "./utils/kafka";
+import { runKafkaSubscription } from "./utils/subscriptions";
 
 const fastify = Fastify({ logger: true });
 
@@ -30,11 +31,12 @@ fastify.register(orderRoute);
 
 const start = async () => {
   try {
-      Promise.all([
+    Promise.all([
       await connectOrderDB(),
       await producer.connect(),
       await consumer.connect(),
     ]);
+    runKafkaSubscription();
     console.log("Connected to MongoDB");
     await fastify.listen({ port: 8001 });
     console.log("Order service is running on port 8001");
